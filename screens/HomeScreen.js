@@ -11,27 +11,28 @@ import { MapPinIcon } from 'react-native-heroicons/solid'
 
 const {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
+
 export default function HomeScreen() {
   const [activeCategory, setActiveCategory] = useState(1);
 
   return (
-    <View className="flex-1 relative bg-white">
+    <View className="flex-1 relative">
       <StatusBar />
-
       <Image 
+        blurRadius={16}
         source={require('../assets/images/beansBackground1.png')} 
-        style={{height: height*0.2}} 
-        className="w-full absolute -top-5 opacity-10" />
+        style={{width: 400,height: 900,}} 
+        className="w-full h-full absolute -top-5" />
       <SafeAreaView className={ios? '-mb-8': ''}>
         {/* avatar and bell icon */}
-        <View className="mx-4 flex-row justify-between items-center">
+        <View className="mx-4 flex-row justify-between items-center top-4">
           <Image source={require('../assets/images/avatar.png')} 
             className="h-9 w-9 rounded-full" />
           
           <View className="flex-row items-center space-x-2">
             <MapPinIcon size="25" color={themeColors.bgLight} />
-            <Text className="font-semibold text-base">
-              New York, NYC
+            <Text className="font-semibold text-base ">
+             Chicago, IL
             </Text>
           </View>
           <BellIcon size="27" color="black" />
@@ -41,14 +42,13 @@ export default function HomeScreen() {
           <View className="flex-row items-center rounded-full p-1 bg-[#e6e6e6]">
             <TextInput placeholder='Search' className="p-4 flex-1 font-semibold text-gray-700" />
             <TouchableOpacity 
-              className="rounded-full p-2" 
-              style={{backgroundColor: themeColors.bgLight}}>
-              <MagnifyingGlassIcon size="25" strokeWidth={2} color="white" />
+              className="p-2">
+              <MagnifyingGlassIcon size="25" strokeWidth={2} color="gray" />
             </TouchableOpacity>
           </View>
         </View>
         {/* categories */}
-        <View className="px-5 mt-6">
+        <View className="px-5 mt-6 top-2">
           <FlatList 
             horizontal
             showsHorizontalScrollIndicator={false}

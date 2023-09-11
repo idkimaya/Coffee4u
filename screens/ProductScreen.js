@@ -6,7 +6,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeftCircleIcon, MinusIcon, PlusIcon } from 'react-native-heroicons/outline';
 import { HeartIcon, StarIcon } from 'react-native-heroicons/solid';
 import { themeColors } from '../theme';
+import { AntDesign } from '@expo/vector-icons';
 import { ShoppingBag } from 'react-native-feather';
+import { Button } from "native-base";
 const {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
 
@@ -19,19 +21,22 @@ export default function FavouriteScreen(props) {
     <View className="flex-1">
       <StatusBar style="light" />
       <Image 
+        blurRadius={50}
         source={require('../assets/images/beansBackground2.png')} 
         style={{height: 300, borderBottomLeftRadius: 50, borderBottomRightRadius: 50}} 
         className="w-full absolute" />
       <SafeAreaView className="space-y-4 flex-1">
-        <View className="mx-4 flex-row justify-between items-center">
+
+        <View className="mx-4 flex-row justify-between items-center top-3">
           <TouchableOpacity className=" rounded-full " onPress={()=> navigation.goBack()}>
-            <ArrowLeftCircleIcon size="50" strokeWidth={1.2} color="white" />
+           <AntDesign name="arrowleft" size={30} color="white" />
           </TouchableOpacity>
 
-          <TouchableOpacity className=" rounded-full border-2 border-white p-2">
-            <HeartIcon size="24" color="white" />
+          <TouchableOpacity onPress={()=> navigation.navigate('Favorite', {...item})}>
+            <AntDesign name="hearto" size={26} color="white" />
           </TouchableOpacity>
         </View>
+
         <View 
           style={{
             shadowColor: themeColors.bgDark,
@@ -59,7 +64,9 @@ export default function FavouriteScreen(props) {
         </View>
         <View className="px-4 space-y-2">
           <Text style={{color: themeColors.text}} className="text-lg font-bold">Coffee size</Text>
-          <View className="flex-row justify-between">
+          <View style={{display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',}}>
             <TouchableOpacity 
              onPress={()=> setSize('small')}
              style={{backgroundColor: size=='small'? themeColors.bgLight: 'rgba(0,0,0,0.07)'}} 
@@ -96,9 +103,9 @@ export default function FavouriteScreen(props) {
           <View className="flex-row justify-between items-center px-4 mb-2">
               <View className="flex-row items-center space-x-1">
                 <Text className="text-base text-gray-700 font-semibold opacity-60">
-                  Volume 
+                  Size 
                 </Text>
-                <Text className="text-base text-black font-semibold"> {item.volume}</Text>
+                <Text className="text-base text-black font-semibold"> {item.size}</Text>
               </View>
               <View 
                 className="flex-row items-center space-x-4 border-gray-500 border rounded-full p-1 px-4">
@@ -111,15 +118,17 @@ export default function FavouriteScreen(props) {
                 </TouchableOpacity>
               </View>
           </View>
+
           {/* buy now button */}
           <View className="flex-row justify-between px-4">
             <TouchableOpacity className="p-4 rounded-full border border-gray-400">
               <ShoppingBag size="30" color="gray" />
             </TouchableOpacity>
             <TouchableOpacity 
+             onPress={()=> navigation.navigate('Cart', {...item})}
               style={{backgroundColor: themeColors.bgLight}} 
               className="p-4 rounded-full flex-1 ml-4">
-              <Text className="text-center text-white text-base font-semibold">Buy now</Text>
+              <Text className="text-center text-white text-base font-bold">Add to cart</Text>
             </TouchableOpacity>
           </View>
         </View>

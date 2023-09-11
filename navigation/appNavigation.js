@@ -4,6 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import { Dimensions, LogBox, Platform, Text, View } from 'react-native';
 import ProductScreen from '../screens/ProductScreen';
+import CartScreen from '../screens/CartScreen';
+import FavScreen from '../screens/FavScreen';
+import AccountScreen from '../screens/AccountScreen';
 import { themeColors } from '../theme';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -26,6 +29,9 @@ export default function AppNavigation() {
       }}>
         <Stack.Screen name="Home" options={{headerShown: false}} component={HomeTabs} />
         <Stack.Screen name="Product" options={{headerShown: false}} component={ProductScreen} />
+        <Stack.Screen name="Cart" options={{headerShown: false}}  component={CartScreen} />
+        <Stack.Screen name="Favorite" options={{headerShown: false}}  component={FavScreen} />
+        <Stack.Screen name="Account" options={{headerShown: false}}  component={AccountScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -39,15 +45,14 @@ function HomeTabs(){
         tabBarShowLabel: false,
         tabBarIcon: ({ focused }) => menuIcons(route, focused),
         tabBarStyle: {
-          marginBottom: 20,
-          height: 75,
-          alignItems: 'center',
-          
-          borderRadius: 100,
-          marginHorizontal: 20,
-          backgroundColor: themeColors.bgLight,
-
-        },
+            marginBottom: 26,
+            height: 75,
+            alignItems: 'center',
+            position:"absolute",
+            borderRadius: 100,
+            marginHorizontal: 10,
+            backgroundColor: "white",
+          },
         tabBarItemStyle: {
           marginTop: ios? 30: 0,
           
@@ -56,8 +61,8 @@ function HomeTabs(){
       
       >
       <Tab.Screen name="home" component={HomeScreen} />
-      <Tab.Screen name="favourite" component={HomeScreen} />
-      <Tab.Screen name="cart" component={HomeScreen} />
+      <Tab.Screen name="favourite" component={FavScreen} />
+      <Tab.Screen name="cart" component={CartScreen} />
     </Tab.Navigator>
   )
 }
@@ -67,17 +72,16 @@ const menuIcons = (route, focused)=> {
   
 
   if (route.name === 'home') {
-    icon =  focused? <HomeSolid size="30" color={themeColors.bgLight} /> : <HomeOutline size="30" strokeWidth={2} color="white" />
+    icon =  focused? <HomeSolid size="30" color={themeColors.bgDark} /> : <HomeOutline size="30" strokeWidth={2} color={themeColors.bgLight} />
   } else if (route.name === 'favourite') {
-    icon =  focused? <HeartSolid size="30" color={themeColors.bgLight} /> : <HeartOutline size="30" strokeWidth={2} color="white" />
+    icon =  focused? <HeartSolid size="30" color={themeColors.bgDark} /> : <HeartOutline size="30" strokeWidth={2} color={themeColors.bgLight} />
   }else if(route.name==='cart'){
-    icon =  focused? <BagSolid size="30" color={themeColors.bgLight} /> : <BagOutline size="30" strokeWidth={2} color="white" />
+    icon =  focused? <BagSolid size="30" color={themeColors.bgDark} /> : <BagOutline size="30" strokeWidth={2} color={themeColors.bgLight} />
   }
 
   
-  let buttonClass = focused? "bg-white": "";
   return (
-    <View className={"flex items-center rounded-full p-3 shadow " + buttonClass}>
+    <View>
       {icon}
     </View>
   )

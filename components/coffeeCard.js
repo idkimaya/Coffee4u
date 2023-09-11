@@ -5,7 +5,11 @@ import { useNavigation } from '@react-navigation/native'
 import { StarIcon } from 'react-native-heroicons/solid';
 import { PlusIcon } from 'react-native-heroicons/outline';
 const {width, height} = Dimensions.get('window');
+
+
 const ios = Platform.OS == 'ios';
+
+
 export default function CoffeeCard({item}) {
   const navigation = useNavigation();
   return (
@@ -16,6 +20,7 @@ export default function CoffeeCard({item}) {
           backgroundColor: themeColors.bgDark, 
           height: ios? height*0.4 : height*0.50, 
           width: width*0.65,
+          bottom:42
         }} 
         >
         <View 
@@ -44,9 +49,9 @@ export default function CoffeeCard({item}) {
               </View>
               <View className="flex-row space-x-1 z-10 mb-6">
                 <Text className="text-base text-white font-semibold opacity-60">
-                  Volume 
+                  Size :
                 </Text>
-                <Text className="text-base text-white font-semibold"> {item.volume}</Text>
+                <Text className="text-base text-white font-semibold"> {item.size}</Text>
               </View>
             </View>
             
