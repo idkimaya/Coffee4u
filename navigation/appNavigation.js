@@ -7,6 +7,7 @@ import ProductScreen from '../screens/ProductScreen';
 import CartScreen from '../screens/CartScreen';
 import FavScreen from '../screens/FavScreen';
 import AccountScreen from '../screens/AccountScreen';
+import LoginScreen from '../screens/LoginScreen'
 import { themeColors } from '../theme';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -32,6 +33,7 @@ export default function AppNavigation() {
         <Stack.Screen name="Cart" options={{headerShown: false}}  component={CartScreen} />
         <Stack.Screen name="Favorite" options={{headerShown: false}}  component={FavScreen} />
         <Stack.Screen name="Account" options={{headerShown: false}}  component={AccountScreen} />
+        <Stack.Screen name="Login" options={{headerShown: false}}  component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
